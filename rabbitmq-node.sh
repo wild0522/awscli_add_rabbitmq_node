@@ -13,12 +13,12 @@ rabbitmq-plugins enable rabbitmq_management
 
 if [$hostname == ""]; then
 echo "add admin account" >> /home/ubuntu/user_data.log
-rabbitmqctl add_user admin admin
-rabbitmqctl set_user_tags admin administrator
-rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
+rabbitmqctl add_user $rbuser $rbpass
+rabbitmqctl set_user_tags $rbuser administrator
+rabbitmqctl set_permissions -p / $rbuser ".*" ".*" ".*"
 fi
 
-echo "DIEPQUIIZYQUUQYSYSS" > /var/lib/rabbitmq/.erlang.cookie
+echo "$rbcookie" > /var/lib/rabbitmq/.erlang.cookie
 
 echo "rabbit restart" >> /home/ubuntu/user_data.log
 service rabbitmq-server restart

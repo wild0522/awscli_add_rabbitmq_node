@@ -7,8 +7,12 @@ ami="ami-726faa10"
 keypairs="rabbitmq_test"
 instancetype="t2.micro"
 subnetid="subnet-95e3eee0"
-securitygid="sg-769e4b11"
+securitygid="sg-769e4b15"
 
+#RabbitMQ Config=============
+rbuser="admin"
+rbpass="admin"
+rbcookie="SAMOIJAOSDMOWIDMOQXJC"
 #============================
 
 echo "name:($name)"
@@ -70,6 +74,9 @@ echo "hostname = $hostname"
 fname=rabbitmq-node-$hostname.sh
 echo "#!/bin/bash" > $fname
 echo "hostname=$hostname" >> $fname
+echo "rbuser=$rbuser" >> $fname
+echo "rbpass=$rbpass" >> $fname
+echo "rbcookie=$rbcookie" >> $fname
 
 f=$(cat rabbitmq-node.sh)
 echo "$f" >> $fname
@@ -87,3 +94,4 @@ aws ec2 run-instances --image-id $ami \
 --user-data file://$fname
 
 rm $fname
+
