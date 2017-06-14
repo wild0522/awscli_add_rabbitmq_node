@@ -85,3 +85,5 @@ aws ec2 run-instances --image-id $ami \
 --security-group-ids $securitygid \
 --count 1 \
 --user-data file://$fname
+
+rm $fname
